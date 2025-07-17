@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY environment.yml .
 
-RUN conda env create -f environment.yml
+RUN conda env update -f environment.yml
 
 SHELL ["conda", "run", "-n", "ddi_capstone_env", "/bin/bash", "-c"]
 
