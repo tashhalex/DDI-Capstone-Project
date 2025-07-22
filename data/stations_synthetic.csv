@@ -1,7 +1,0 @@
-station_id,station_name,latitude,longitude,elevation_m,antenna_gain_dBi
-STAT001,"Wallops Island, VA",37.9375,-75.4667,6,45
-STAT002,"Hawthorne, CA",33.9226,-118.3345,50,48
-STAT003,"Madrid, Spain",40.4314,-3.7026,650,50
-STAT004,"Seongnam, South Korea",37.4138,127.5183,80,47
-STAT005,"Cape Town, South Africa",-33.9249,18.4241,15,46
-STAT006,"Perth, Australia",-31.9505,115.8605,100,49
