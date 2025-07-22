@@ -89,7 +89,7 @@ def perform_eda(features_df):
     ax.plot(z[:,0], z[:, 1], color='red', linewidth=2, label='LOWESS Trend')
     ax.annotate('High Decay Zone', xy=(15,100), xytext=(12,1000),
                 arrowprops=dict(arrowstyle='->', color='black'), fontsize=9)
-    ax.annotate('Stable Orbit Zone', xy=(3, 3000), xytext=(5, 4000),
+    ax.annotate('Stable Orbit Zone', xy=(5, 3000), xytext=(5, 4000),
                 arrowprops=dict(arrowstyle='->', color='black'), fontsize=9)
     ax.set_title('Mean Motion vs. Days to Decay with LOWESS Trend & Annotations')
     ax.legend()
@@ -99,7 +99,7 @@ def perform_eda(features_df):
 
 # Modelin & Evaluation Functions
 def train_eval_model(features_df):
-    X = features_df['MEAN_MOTION', 'ECCENTRICITY', 'INCLINATION', 'BSTAR']
+    X = features_df[['MEAN_MOTION', 'ECCENTRICITY', 'INCLINATION', 'BSTAR']]
     y = features_df['days_to_decay']
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -121,14 +121,14 @@ def train_eval_model(features_df):
     print(f'Average Cross-Validated MAE: {-cv_mae_scores.mean():.2f} days')
 
     fig, ax = plt.subplots(figsize=(8,5))
-    sns.barplot(x=['MEAN_MOTION', 'ECCENTRICITY', 'INCLINATION', 'BSTAR'], y=rf_model.feature_importances_, ax=ax)
+    sns.barplot(x=['MEAN_MOTION', 'ECCENTRICITY', 'INCLINATION', 'BSTAR'], y=rf_model.feature_importances_, ax=ax, color='green', edgecolor='black')
     ax.set_title('Random Forest Feature Importances')
     plt.tight_layout()
     plt.show()
 
     fig, ax = plt.subplots(figsize=(7,7))
-    ax.scatter(y_test, y_pred, alpha=0.3, color='green')
-    ax.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--')
+    ax.scatter(y_test, y_pred, alpha=0.3, color='black')
+    ax.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', color='white')
     ax.set_xlabel('Actual Days to Decay')
     ax.set_ylabel('Predicted Days to Decay')
     ax.set_title('Actual vs. Predicted Days to Decay')
@@ -138,7 +138,7 @@ def train_eval_model(features_df):
 
     residuals = y_test - y_pred
     fig, ax = plt.subplots(figsize=(8,5))
-    sns.hisplot(residuals[(residuals > -50) & (residuals < 50)], bins=100, kde=True, ax=ax, color='green', alpha=0.7)
+    sns.histplot(residuals[(residuals > -50) & (residuals < 50)], bins=100, kde=True, ax=ax, color='green', alpha=0.7)
     ax.set_title('Residuals Distribution (Zoomed -50 to 50)')
     ax.set_xlabel('Prediction Error (Residuals)')
     plt.tight_layout()
