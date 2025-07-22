@@ -1,0 +1,25 @@
+# Ignore data files except raw_tles/
+data/features.csv
+data/all_tle_merged.csv
+data/cleaned_data/
+!data/raw_tles/
+
+# Ignore model artifacts
+
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore Python artifacts
+__pycache__/
+*.pyc
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Streamlit logs/cache
+.streamlit/
+
+# VS Code settings
+.vscode/

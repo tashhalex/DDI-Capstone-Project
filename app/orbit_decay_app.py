@@ -99,7 +99,7 @@ st.pyplot(fig2)
 
 # Footer
 st.markdown('---')
-st.markdown('🛰️Built by Tashi Hatchell (Alexander) -- Powered by Random Forests and Streamlit')
+st.markdown(':sparkles: Built by Tashi Hatchell (Alexander) -- Powered by Random Forests and Streamlit :streamlit: :sparkles:')
 st.markdown("""⚠️ _This prediction is based on historical data trends using a statistics-based,
 machine learning model and may differ from authoritative forecasts provided by Space-Track 
 or other satellite tracking agencies._ ⚠️ """)
