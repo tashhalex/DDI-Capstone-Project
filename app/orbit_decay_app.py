@@ -56,7 +56,7 @@ if st.sidebar.button('Predict Days to Decay'):
     st.success(f""" 
     Predicted Days to Decay: **{prediction:.2f} days** (± {MAE_ESTIMATE} days)\n\n
     Expected Decay Date: **{decay_date.strftime('%d %B %Y')}**""")
-
+st.markdown("---")
 # Batch Predictions
 st.subheader('Batch Prediction')
 st.markdown('If you need predictions for multiple satellites...')
