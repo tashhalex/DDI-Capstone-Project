@@ -5,7 +5,8 @@ data/cleaned_data/
 !data/raw_tles/
 
 # Ignore model artifacts
-
+models/
+.joblib
 
 # Ignore system files
 .DS_Store
