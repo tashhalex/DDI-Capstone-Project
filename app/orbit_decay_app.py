@@ -5,6 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import joblib
 import datetime
+import base64
 
 # Page Configuration
 st.set_page_config(
@@ -20,6 +21,26 @@ def load_model():
 
 model = load_model()
 MAE_ESTIMATE = 2.3
+
+def display_styled_image(image_path, caption="", width="80%", shadow=True, border_radius='10px'):
+    try:
+        with open(image_path, 'rb') as img_file:
+            img_bytes = img_file.read()
+            img_base64 = base64.b64encode(img_bytes).decode()
+        shadow_style = 'box-shadow: 0 4px 8px rgba(0,0,0,0.6);' if shadow else ""
+
+        st.markdown(
+            f"""
+            <div style='text-align: center; padding: 10px'>
+                <img src='data:image/png;base64,{img_base64}'
+                    style='border-radius: {border_radius}; {shadow_style} width: {width};' />
+                <p style='color: #6f6d72; font-size:16px;'>{caption}</p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    except FileNotFoundError:
+        st.warning(f'⚠️ Image not found: {image_path}')
 
 st.title('🛰️ Satellite Decay Predictor 🛰️')
 
@@ -68,13 +89,7 @@ with tab1:
     <h6 style='color: #9ccddc; font-family: Poppins;'>
     Initial Findings:</h6>
     """, unsafe_allow_html=True)
-    st.markdown("""
-    <div style='text-align: center; padding: 10px'>
-        <img src='/assets/corr-heatmap.png'
-                style='border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.6); width: 80%;' />
-        <p style='color: #6f6d72; font-size:16px;'>Correlation Heatmap</p>
-    </div>
-    """, unsafe_allow_html=True)
+    display_styled_image('assets/corr-heatmap.png', 'Correlation Heatmap')
 
     st.markdown("""
     <h4 style='color: #c9374c; font-family: Poppins;'>
@@ -96,6 +111,27 @@ with tab1:
     <h4 style='color: #c9374c; font-family: Poppins;'>
     Visualizations & Key Findings</h4>
     """, unsafe_allow_html=True)
+    display_styled_image('assets/feat-import.png', 'Feature Importances')
+    st.markdown("""
+    <p style='text-align:center; font-family: Helvetica;'>
+    A histogram of feature importances showed that mean motion and inclination are significant predictors of the 
+    decay date, with eccentricity and B* being fairly insignificant.</p>
+    """, unsafe_allow_html=True)
+
+    display_styled_image('assets/mm_decay.png', 'Mean Motion vs. Days to Decay LOWESS')
+    st.markdown("""
+    <p style='text-align:center; font-family: Helvetica;'>
+    This graph gives a visual representation of the relationship between mean motion and decay. It shows that
+    satellites with a higher mean motion - meaning lower orbit, tend to decay more rapidly than satellites with
+    a lower mean motion or higher orbit.</p>
+    """, unsafe_allow_html=True)
+    display_styled_image('assets/residuals.png', 'Residuals Distribution')
+    st.markdown("""
+    <p style='text-align:center; font-family: Helvetica;'>
+    This residuals distribution graph gives a visual representation of how off the model's predictions were
+    from actual values. It shows that most predictions are close to 0 error, with most predictions occurring
+    within a few days of the actual decay time.</p>
+    """, unsafe_allow_html=True)
     st.markdown("""
     <h4 style='color: #c9374c; font-family: Poppins;'>
     Future Areas of Research</h4>
@@ -105,7 +141,6 @@ with tab1:
         <li style='font-family: Helvetica;'>Combine phyics-based models with machine learning models. </li>
     </ul>
     """, unsafe_allow_html=True)
-
 
 #--- PREDICTOR Tab ---
 with tab2:
