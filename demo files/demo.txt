@@ -1,0 +1,5 @@
+Mean Motion: 15.5
+Inclination: 51.63
+Eccentricity: 0.000236
+B* Drag: 0.000166
+Last TLE EPOCH Date: 7-25-2025 

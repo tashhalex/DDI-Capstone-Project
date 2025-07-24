@@ -193,7 +193,7 @@ with tab2:
             batch_df['Expected_Decay_Date'] = pd.to_datetime(batch_df['TLE_EPOCH']) + pd.to_timedelta(batch_df['Predicted_Days_to_Decay'], unit='d')
             st.success('✅ Batch prediction complete!')
             st.dataframe(batch_df)
-            csv = batch_df.to_csv(index=False).encode=('utf-8')
+            csv = batch_df.to_csv(index=False)
             st.download_button('📥Download Predictions as CSV', data=csv, file_name='batch_predictions.csv')
         else:
             st.error(':anger: Uploaded CSV is missing required columns. :anger:')
