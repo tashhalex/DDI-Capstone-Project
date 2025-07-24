@@ -249,9 +249,9 @@ with tab3:
         👩🏽‍🚀 About the Creator</h4>
         """, unsafe_allow_html=True)
         st.markdown("""
-        <p> Hi! I'm Tashi Hatchell (Alexander) - an aspiring data scientist who is passionate about space exploration
-        and satellite dynamics. This project is part of my capstone project to model satellite orbital decay using
-        machine learning.<p>
+        <p> Hi! I'm Tashi Hatchell (Alexander) - an aspiring data scientist and software developer who is passionate
+        about space exploration and satellite dynamics. This project is part of my capstone project to model 
+        satellite orbital decay using machine learning.<p>
         """, unsafe_allow_html=True)
         st.markdown("""
         <h6 style='color: #9ccddc; font-family: Poppins;'>
