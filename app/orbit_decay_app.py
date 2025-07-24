@@ -182,7 +182,7 @@ with tab2:
     })
                 
     # Predict Button
-    if st.button('Predict Days to Decay'):
+    if st.button('Run Prediction'):
         prediction = model.predict(user_input_df)[0]
         decay_date = tle_date + datetime.timedelta(days=prediction)
 
