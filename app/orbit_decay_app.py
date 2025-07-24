@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import joblib
 import datetime
 import base64
+import os
+import urllib.request
 
 # Page Configuration
 st.set_page_config(
@@ -15,9 +17,19 @@ st.set_page_config(
  )
 
 # Load Trained Model
+model_url = "https://dl.dropboxusercontent.com/scl/fi/e7n8w1ghx9tp8sukrf6mz/rf_model.joblib?rlkey=f1sk13ifutnxttvqym4mbkwgd&st=j57wcij5&dl=1"
+model_path = os.path.join('models', 'rf_model.joblib')
+
+def download_model():
+    if not os.path.exists(model_path):
+        os.makedirs(os.path.dirname(model_path), exist_ok=True)
+        urllib.request.urlretrieve(model_url, model_path)
+        print('Model downloaded successfully')
+
 @st.cache_resource
 def load_model():
-    return joblib.load('../models/rf_model.joblib')
+    download_model()
+    return joblib.load(model_path)
 
 model = load_model()
 MAE_ESTIMATE = 2.3
@@ -42,7 +54,7 @@ def display_styled_image(image_path, caption="", width="80%", shadow=True, borde
     except FileNotFoundError:
         st.warning(f'⚠️ Image not found: {image_path}')
 
-st.title('🛰️ Satellite Decay Predictor 🛰️')
+st.title('🛰️')
 
 # Tabs
 tab1, tab2, tab3 = st.tabs(['🏠 Home', '📊 Prediction Dashboard', '👤 About Me/Contact'])
@@ -226,24 +238,30 @@ with tab2:
     or other satellite tracking agencies._ ⚠️ """)
 
 with tab3: 
-    st.markdown("""
-    <h4 style='color: #c9374c; font-family: Poppins;'>
-    👩🏽‍🚀 About the Creator</h4>
-    """, unsafe_allow_html=True)
-    st.markdown("""
-    <p> Hi! I'm Tashi Hatchell (Alexander) - an aspiring data scientist who is passionate about space exploration
-    and satellite dynamics. This project is part of my capstone project to model satellite orbital decay using
-    machine learning.<p>
-    """, unsafe_allow_html=True)
-    st.markdown("""
-     <h6 style='color: #9ccddc; font-family: Poppins;'>
-    📫 Contact:</h6>
-    <ul>
-        <li>Email: thatchell.aca@gmail.com</li>
-        <li>GitHub: <a href="https://github.com/tashhalex" target=_blank>https://github.com/tashhalex</a></li>
-        <li>LinkedIn: <a href="https://www.linkedin.com/in/thatchell/" target=_blank>https://www.linkedin.com/in/thatchell/</a></li>
-    </uL>
-    """, unsafe_allow_html=True)
+    col3, col4 = st.columns(2)
+
+    with col3:
+        display_styled_image('assets/me.png', 'The Creator')
+
+    with col4:
+        st.markdown("""
+        <h4 style='color: #c9374c; font-family: Poppins;'>
+        👩🏽‍🚀 About the Creator</h4>
+        """, unsafe_allow_html=True)
+        st.markdown("""
+        <p> Hi! I'm Tashi Hatchell (Alexander) - an aspiring data scientist who is passionate about space exploration
+        and satellite dynamics. This project is part of my capstone project to model satellite orbital decay using
+        machine learning.<p>
+        """, unsafe_allow_html=True)
+        st.markdown("""
+        <h6 style='color: #9ccddc; font-family: Poppins;'>
+        📫 Contact:</h6>
+        <ul>
+            <li>Email: thatchell.aca@gmail.com</li>
+            <li>GitHub: <a href="https://github.com/tashhalex" target=_blank>https://github.com/tashhalex</a></li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/thatchell/" target=_blank>https://www.linkedin.com/in/thatchell/</a></li>
+        </uL>
+        """, unsafe_allow_html=True)
 
     # Footer
     st.markdown('---')
