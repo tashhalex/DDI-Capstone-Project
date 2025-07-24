@@ -54,14 +54,14 @@ def display_styled_image(image_path, caption="", width="80%", shadow=True, borde
     except FileNotFoundError:
         st.warning(f'⚠️ Image not found: {image_path}')
 
-st.title('🛰️')
+st.markdown("""<h1 style='color:#a44322; font-family: Poppins; font-size: 40px;'>🛰️ Satellite Decay Predictor 🛰️</h1> """, unsafe_allow_html=True)
 
 # Tabs
 tab1, tab2, tab3 = st.tabs(['🏠 Home', '📊 Prediction Dashboard', '👤 About Me/Contact'])
 
 # --- HOME Tab ----
 with tab1:
-    st.markdown("<h2 style='color:#FFFFFF; font-family: Poppins;'> Satellite Decay Prediction Project</h2>", unsafe_allow_html=True)
+   
     st.markdown("""
     <h4 style='color:#c9374c; font-family: Poppins;'>
     Problem Statement & Objectives</h4>""", unsafe_allow_html=True)
