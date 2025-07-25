@@ -150,7 +150,7 @@ with tab1:
     <ul>
         <li style='font-family: Helvetica;'>Incorporate solar activity, space weather, and atmospheric weather data for improved drag modeling.</li>
         <li style='font-family: Helvetica;'>Quantify Space-Track's RCS Size and incorporate it as a feature in the model.</li>
-        <li style='font-family: Helvetica;'>Combine phyics-based models with machine learning models. </li>
+        <li style='font-family: Helvetica;'>Combine physics-based models with machine learning models. </li>
     </ul>
     """, unsafe_allow_html=True)
 
